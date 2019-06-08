@@ -22,6 +22,56 @@
 
 デバッガの起動設定が生成されました。
 
+正しく生成されない場合は以下の内容を `.vscode/launch.json` に貼り付けてください。
+
+```
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'hello'",
+      "cargo": {
+        "args": [
+          "build",
+          "--bin=hello",
+          "--package=hello"
+        ],
+        "filter": {
+          "name": "hello",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'hello'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--bin=hello",
+          "--package=hello"
+        ],
+        "filter": {
+          "name": "hello",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```
+
 ![](./05-debugger/codelldb-launch-04.png)
 
 起動設定のタブを閉じ、`main.rs` のタブに戻ります。そして、左ペインの実行ボタンをクリックします。
