@@ -195,3 +195,23 @@ frame "frame #0: 0x0000555555557cd7 hello`hello::main::h796ecd7574dcc3b0 at /hom
 ```
 
 ちなみに、ここまで到達するには456ステップが必要だったようです。Python にやらせて正解でしたね。
+
+## 真犯人を観察する
+
+Python が突き止めてくれた結果によれば、犯人は以下の場所の付近にいるようです。
+
+```
+/home/ubuntu/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/./libstd/sys/unix/fd.rs:110
+```
+
+この場所は「何かが出力された直後」の位置ですから、真犯人はこの直前の呼出のあたりにいるはずです。
+
+真相に迫るため、VS Code で当該のコードを開きましょう。
+
+左のペインでエクスプローラタブを開き、右クリックして `Add Folder to Workspace` をクリックします。
+
+そして、以下のパスを入力し、開きます。
+
+```
+/home/ubuntu/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/
+```
